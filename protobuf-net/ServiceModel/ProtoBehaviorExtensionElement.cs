@@ -1,8 +1,5 @@
-﻿#if NET_3_0 && !SILVERLIGHT
+﻿#if NET_3_0 && !SILVERLIGHT && !NETCORE
 using System;
-using System.Collections.Generic;
-using System.ServiceModel.Configuration;
-using System.Text;
 
 namespace ProtoBuf.ServiceModel
 {
@@ -21,7 +18,7 @@ namespace ProtoBuf.ServiceModel
 
         /// <summary>
         /// Gets the type of behavior.
-        /// </summary>     
+        /// </summary>
         public override Type BehaviorType
         {
             get

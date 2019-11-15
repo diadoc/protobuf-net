@@ -8,11 +8,16 @@
     <FileVersion>1.0.0.282</FileVersion>
     <ProductVersion>1.0.0.282</ProductVersion>
     <Product>protobuf-net</Product>
-    <DefineConstants>$(DefineConstants);NETCORE</DefineConstants>
+    <DefineConstants>$(DefineConstants);NET_3_0;NETCORE</DefineConstants>
+    <IsPackable>True</IsPackable>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' != 'Profile'">
     <AssemblyOriginatorKeyFile>../ProtoBuf.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.6.0" />
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.6.0" />
+  </ItemGroup>
   <!--
   <ItemGroup Condition=" '$(Configuration)' != 'Net20' ">
     <Reference Include="System.Runtime.Serialization">

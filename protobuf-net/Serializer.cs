@@ -313,7 +313,7 @@ namespace ProtoBuf
         /// <param name="source">The binary stream to apply to the new instance (cannot be null).</param>
         /// <returns>A new, initialized instance.</returns>
         [Obsolete(OBSOLETE_MESSAGE_PREFIX_STYLE, false)]
-#if !SILVERLIGHT && !CF && !NETCORE
+#if !SILVERLIGHT && !CF
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         public static T DeserializeWithLengthPrefix<T>(Stream source)
@@ -625,7 +625,7 @@ namespace ProtoBuf
         /// either the original instance was null, or the stream defines a known sub-type of the
         /// original instance.</returns>
         [Obsolete(OBSOLETE_MESSAGE_PREFIX_STYLE, false)]
-#if !SILVERLIGHT && !CF && !NETCORE
+#if !SILVERLIGHT && !CF
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         public static T MergeWithLengthPrefix<T>(Stream source, T instance)
@@ -683,7 +683,7 @@ namespace ProtoBuf
         /// <param name="instance">The existing instance to be serialized (cannot be null).</param>
         /// <param name="destination">The destination stream to write to.</param>
         [Obsolete(OBSOLETE_MESSAGE_PREFIX_STYLE, false)]
-#if !SILVERLIGHT && !CF && !NETCORE
+#if !SILVERLIGHT && !CF
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         public static void SerializeWithLengthPrefix<T>(Stream destination, T instance)

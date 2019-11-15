@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using System.Net;
 using System.Threading;
-#if NET_3_0
-using System.ServiceModel;
-#endif
 
 namespace ProtoBuf.ServiceModel.Client
 {
@@ -53,7 +49,7 @@ namespace ProtoBuf.ServiceModel.Client
                 waitEvent = null;
             }
         }
-        
+
         /// <summary>
         /// Create a new client object.
         /// </summary>
@@ -116,7 +112,7 @@ namespace ProtoBuf.ServiceModel.Client
         {
             CheckDisposed();
             if (args == null) throw new ArgumentNullException("args");
-            
+
             waitEvent.Reset();
             AsyncResult result = null;
             SendRequestAsync(method, delegate(AsyncResult ar)
@@ -223,7 +219,7 @@ namespace ProtoBuf.ServiceModel.Client
             if(handler != null) handler(this, new ExceptionEventArgs(exception));
         }
     }
-    
 
-    
+
+
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
-#if !(CF || SILVERLIGHT || NETCORE)
+#if !(CF || SILVERLIGHT)
 using System.Reflection.Emit;
 #endif
 
@@ -21,7 +21,7 @@ namespace ProtoBuf
                     throw new ProtoException(message);
                 };
             }
-#if (CF || SILVERLIGHT || NETCORE)
+#if (CF || SILVERLIGHT)
             if (ctor.IsPublic) {
                 if (ctor.DeclaringType == typeof(T)) {
                     return delegate { return Activator.CreateInstance<T>(); };

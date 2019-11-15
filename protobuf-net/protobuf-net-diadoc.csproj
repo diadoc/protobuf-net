@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>ProtoBuf</RootNamespace>
+    <AssemblyName>protobuf-net</AssemblyName>
+    <AssemblyVersion>1.0.0.282</AssemblyVersion>
+    <FileVersion>1.0.0.282</FileVersion>
+    <ProductVersion>1.0.0.282</ProductVersion>
+    <Product>protobuf-net</Product>
+    <DefineConstants>$(DefineConstants);NETCORE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' != 'Profile'">
+    <AssemblyOriginatorKeyFile>../ProtoBuf.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <!--
+  <ItemGroup Condition=" '$(Configuration)' != 'Net20' ">
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  -->
+  <ItemGroup>
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Licence.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

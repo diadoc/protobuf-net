@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
-#if !(CF || SILVERLIGHT)
+#if !(CF || SILVERLIGHT || NETCORE)
 using System.Reflection.Emit;
 #endif
 
@@ -14,14 +14,14 @@ namespace ProtoBuf
             ConstructorInfo ctor = concreteType.GetConstructor(
                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
                     null, Serializer.EmptyTypes, null);
-            
+
             if(ctor == null) {
                 string message = "No parameterless constructor found for " + typeof(T).Name;
                 return delegate {
                     throw new ProtoException(message);
                 };
             }
-#if (CF || SILVERLIGHT)
+#if (CF || SILVERLIGHT || NETCORE)
             if (ctor.IsPublic) {
                 if (ctor.DeclaringType == typeof(T)) {
                     return delegate { return Activator.CreateInstance<T>(); };

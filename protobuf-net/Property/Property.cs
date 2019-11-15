@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
-#if !CF
+#if !(CF || SILVERLIGHT || NETCORE)
 using System.Reflection.Emit;
 #endif
 
@@ -138,10 +138,10 @@ namespace ProtoBuf.Property
             forInit.Init(Tag, format, getValue, setValue, IsOptional, DefaultValue);
             return alt;
         }
-        
+
         protected TValue GetValue(TSource source) { return getValue(source); }
         protected void SetValue(TSource source, TValue value) { setValue(source, value); }
-        
+
         private TValue defaultValue;
         new protected TValue DefaultValue { get { return defaultValue; } }
 
@@ -149,7 +149,7 @@ namespace ProtoBuf.Property
         {
             SetValue(source, DeserializeImpl(source, context));
         }
-     
+
         public abstract TValue DeserializeImpl(TSource source, SerializationContext context);
 
         protected virtual void OnBeforeInit(int tag, ref DataFormat format) { }
@@ -189,7 +189,7 @@ namespace ProtoBuf.Property
                         break;
                     case MemberTypes.Field:
                         FieldInfo field = (FieldInfo)member;
-#if (CF || SILVERLIGHT)
+#if (CF || SILVERLIGHT || NETCORE)
                         // basic boxing/reflection
                         this.getValue = delegate(TSource source) { return (TValue)field.GetValue(source); };
                         this.setValue = delegate(TSource source, TValue value) { field.SetValue(source, value); };
@@ -210,7 +210,7 @@ namespace ProtoBuf.Property
                         il.Emit(OpCodes.Ret);
                         this.getValue = (Getter<TSource, TValue>)method.CreateDelegate(typeof(Getter<TSource, TValue>));
 #endif
-     
+
                         break;
                     default:
                         throw new ArgumentException(member.MemberType.ToString() + " not supported for serialization: ", "member");

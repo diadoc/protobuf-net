@@ -12,7 +12,7 @@ using System.ComponentModel;
 namespace ProtoBuf
 {
     /// <summary>
-    /// Provides protocol-buffer serialization capability for concrete, attributed types. 
+    /// Provides protocol-buffer serialization capability for concrete, attributed types.
     /// </summary>
     /// <remarks>
     /// Protocol-buffer serialization is a compact binary format, designed to take
@@ -35,7 +35,7 @@ namespace ProtoBuf
         internal static readonly Type[] EmptyTypes = new Type[0];
         internal static bool IsEntityType(Type type)
         {
-            return Entity.IsEntity(type);            
+            return Entity.IsEntity(type);
         }
 
         /// <summary>
@@ -104,11 +104,11 @@ namespace ProtoBuf
                   || AttributeUtils.GetAttribute<ProtoPartialIgnoreAttribute>(member.ReflectedType,
                      delegate( ProtoPartialIgnoreAttribute ppia)
                           { return ppia.MemberName == member.Name; }) != null) return false;
-            
+
             // check against the property
             ProtoMemberAttribute pm = AttributeUtils.GetAttribute<ProtoMemberAttribute>(member);
             if (pm == null)
-            { // check also against the type 
+            { // check also against the type
                 pm = AttributeUtils.GetAttribute<ProtoPartialMemberAttribute>(member.ReflectedType,
                     delegate(ProtoPartialMemberAttribute ppma) { return ppma.MemberName == member.Name; });
             }
@@ -158,7 +158,7 @@ namespace ProtoBuf
                 }
                 return false;
             }
-			
+
 #if NET_3_0
 			DataMemberAttribute dm = AttributeUtils.GetAttribute<DataMemberAttribute>(member);
 #else
@@ -225,7 +225,7 @@ namespace ProtoBuf
                 if(dmIsRequired) options |= MemberSerializationOptions.Required;
                 return callerIsTagInference || tag > 0;
             }
-            
+
             XmlElementAttribute xe = AttributeUtils.GetAttribute<XmlElementAttribute>(member);
             if (xe != null)
             {
@@ -261,7 +261,7 @@ namespace ProtoBuf
 #if NET_3_0
 			DataMemberAttribute attribute,
 #else
-		    Attribute attribute,                           
+		    Attribute attribute,
 #endif
 			out string name, out int order, out bool isRequired)
 		{
@@ -313,7 +313,7 @@ namespace ProtoBuf
         /// <param name="source">The binary stream to apply to the new instance (cannot be null).</param>
         /// <returns>A new, initialized instance.</returns>
         [Obsolete(OBSOLETE_MESSAGE_PREFIX_STYLE, false)]
-#if !SILVERLIGHT && !CF
+#if !SILVERLIGHT && !CF && !NETCORE
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         public static T DeserializeWithLengthPrefix<T>(Stream source)
@@ -385,7 +385,7 @@ namespace ProtoBuf
                     length = uint.MaxValue;
                     return true;
                 case PrefixStyle.Base128:
-                    
+
                     if (tag <= 0) return context.TryDecodeUInt32(out length);
                     uint expected = GetFieldToken(tag, WireType.String), actual;
                     if (!context.TryDecodeUInt32(out actual))
@@ -398,7 +398,7 @@ namespace ProtoBuf
                         length = context.DecodeUInt32();
                         return true;
                     }
-                    
+
                     WireType wireType;
                     int actualTag;
                     ParseFieldToken(actual, out wireType, out actualTag);
@@ -445,7 +445,7 @@ namespace ProtoBuf
                         length = SerializationContext.DecodeUInt32(source);
                         return true;
                     }
-                    
+
                     switch(wireType)
                     {
                         case WireType.String:
@@ -625,7 +625,7 @@ namespace ProtoBuf
         /// either the original instance was null, or the stream defines a known sub-type of the
         /// original instance.</returns>
         [Obsolete(OBSOLETE_MESSAGE_PREFIX_STYLE, false)]
-#if !SILVERLIGHT && !CF
+#if !SILVERLIGHT && !CF && !NETCORE
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         public static T MergeWithLengthPrefix<T>(Stream source, T instance)
@@ -683,7 +683,7 @@ namespace ProtoBuf
         /// <param name="instance">The existing instance to be serialized (cannot be null).</param>
         /// <param name="destination">The destination stream to write to.</param>
         [Obsolete(OBSOLETE_MESSAGE_PREFIX_STYLE, false)]
-#if !SILVERLIGHT && !CF
+#if !SILVERLIGHT && !CF && !NETCORE
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         public static void SerializeWithLengthPrefix<T>(Stream destination, T instance)
@@ -708,7 +708,7 @@ namespace ProtoBuf
 
         internal static uint GetFieldToken(int tag, WireType wireType)
         {
-            return (uint)((tag << 3) | ((int)wireType));            
+            return (uint)((tag << 3) | ((int)wireType));
         }
 
         /// <summary>
@@ -793,8 +793,8 @@ namespace ProtoBuf
             }
         }
 
-        
-        
+
+
 
         /// <summary>
         /// Applies a protocol-buffer from a SerializationInfo to an existing instance.
@@ -850,7 +850,7 @@ namespace ProtoBuf
         {
             if (reader == null) throw new ArgumentNullException("reader");
             if (instance == null) throw new ArgumentNullException("instance");
-        
+
             const int LEN = 4096;
             byte[] buffer = new byte[LEN];
             int read;
@@ -900,7 +900,7 @@ namespace ProtoBuf
             if (instance == null)
             {
                 return default(TNewType); // GIGO
-            } 
+            }
 
             using (MemoryStream ms = new MemoryStream())
             {
@@ -958,14 +958,14 @@ namespace ProtoBuf
             Entity e = Entity.Get(typeof(T));
             return e == null ? typeof(T).Name : e.Name;
         }
-        
+
         internal static int GetPrefixLength(int tag)
         {
             if ((tag & ~0x0000000F) == 0) return 1; // 4 bits
             if ((tag & ~0x000007FF) == 0) return 2; // 11 bits
             if ((tag & ~0x0003FFFF) == 0) return 3; // 18 bits
             if ((tag & ~0x01FFFFFF) == 0) return 4; // 25 bits
-            return 5;            
+            return 5;
         }
 
         internal static void ParseFieldToken(uint token, out WireType wireType, out int tag)
@@ -1040,7 +1040,7 @@ namespace ProtoBuf
                 {
                     continue;
                 }
-                
+
                 TEnum key = (TEnum)enumField.GetValue(null);
                 ProtoEnumAttribute ea = AttributeUtils.GetAttribute<ProtoEnumAttribute>(enumField);
                 int value;

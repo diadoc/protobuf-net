@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>protobuf-net-diadoc</id>
+        <version>1.0.0.282</version>
+        <description>protobuf-net version 1.*.* with support netstandart 2.0</description>
+        <authors>SKBKontur</authors>
+    </metadata>
+</package>

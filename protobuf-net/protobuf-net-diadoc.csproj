@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net35;net45;net461;netstandard2.0</TargetFrameworks>
     <RootNamespace>ProtoBuf</RootNamespace>
     <AssemblyName>protobuf-net</AssemblyName>
-    <AssemblyVersion>1.0.0.282</AssemblyVersion>
-    <FileVersion>1.0.0.282</FileVersion>
-    <ProductVersion>1.0.0.282</ProductVersion>
+    <AssemblyVersion>1.0.0.285</AssemblyVersion>
+    <FileVersion>1.0.0.285</FileVersion>
+    <ProductVersion>1.0.0.285</ProductVersion>
     <Product>protobuf-net</Product>
     <DefineConstants>$(DefineConstants);NETCORE</DefineConstants>
     <DebugType>portable</DebugType>

@@ -2,8 +2,11 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>protobuf-net-diadoc</id>
-        <version>1.0.0.282</version>
+        <version>1.0.0.285</version>
         <description>protobuf-net version 1.*.* with support netstandart 2.0</description>
         <authors>SKBKontur</authors>
     </metadata>
+    <files>
+	<file src="bin\Release\**" target="lib" />
+    </files>
 </package>
